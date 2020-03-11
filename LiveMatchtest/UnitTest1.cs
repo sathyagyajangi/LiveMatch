@@ -23,7 +23,7 @@ namespace LiveMatchtest
 
             driver.Manage().Window.Maximize();
 
-            driver.Navigate().GoToUrl("https://cricket.yahoo.net/fixtures-results/commentary/saurashtra-vs-bengal-final-9th-march-2020-live-scores-subn03092020192690");
+            driver.Navigate().GoToUrl("https://cricket.yahoo.net/fixtures-results/commentary/bangladesh-vs-zimbabwe-2nd-t20i-11th-march-2020-live-scores-bazm03112020194190");
 
 
             FunctionLibrary.waitForElement(driver, "//*[@class='si-data-wrap']/div[1]/span/em");
@@ -128,7 +128,7 @@ namespace LiveMatchtest
 
                 FunctionLibrary.MouseOver(driver, "//*[@class='si-ove']");
 
-                string ballcount = driver.FindElement(By.XPath("//*[@class='si-data si-teamA si-active']//*[@class='si-ove']")).Text;
+                string ballcount = driver.FindElement(By.XPath("//*[@class='si-data si-teamB si-active']//*[@class='si-ove']")).Text;
 
 
 
@@ -197,6 +197,8 @@ namespace LiveMatchtest
 
 
             }
+
+        
         }
     }
 }
