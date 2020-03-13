@@ -84,7 +84,7 @@ namespace LiveMatchtest
 
         {
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(1));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMinutes(10));
 
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath(Locatervalue)));
 

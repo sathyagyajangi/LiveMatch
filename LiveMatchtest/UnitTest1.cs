@@ -12,6 +12,8 @@ namespace LiveMatchtest
         [TestMethod]
         public void TestMethod1()
         {
+
+    
             ChromeOptions options = new ChromeOptions();
             options.AddArguments("no-sandbox");
 
@@ -23,7 +25,7 @@ namespace LiveMatchtest
 
             driver.Manage().Window.Maximize();
 
-            driver.Navigate().GoToUrl("https://cricket.yahoo.net/fixtures-results/commentary/bangladesh-vs-zimbabwe-2nd-t20i-11th-march-2020-live-scores-bazm03112020194190");
+            driver.Navigate().GoToUrl("https://cricket.yahoo.net/fixtures-results/commentary/australia-vs-new-zealand-1st-odi-13th-march-2020-live-scores-aunz03132020190718");
 
 
             FunctionLibrary.waitForElement(driver, "//*[@class='si-data-wrap']/div[1]/span/em");
@@ -47,9 +49,9 @@ namespace LiveMatchtest
 
             if(smallstatus.Contains(countrynameBS))
             {
-                FunctionLibrary.waitForElement(driver, "//*[@class='si-ove']");
+                FunctionLibrary.waitForElement(driver, "//*[@class='si-data si-teamB si-active']//*[@class='si-ove']");
 
-                FunctionLibrary.MouseOver(driver, "//*[@class='si-ove']");
+                FunctionLibrary.MouseOver(driver, "//*[@class='si-data si-teamB si-active']//*[@class='si-ove']");
 
                 string ballcount = driver.FindElement(By.XPath("//*[@class='si-data si-teamB si-active']//*[@class='si-ove']")).Text;
 
@@ -70,7 +72,10 @@ namespace LiveMatchtest
 
                 Thread.Sleep(2000);
 
+                int wides = driver.FindElements(By.XPath("//*[text()='wd']")).Count;
+                int nballs = driver.FindElements(By.XPath("//*[text()='nb']")).Count;
 
+                int wkts = driver.FindElements(By.XPath("//*[@class='si-box' and text()='W']")).Count;
                 try
                 {
                     for (int i = 0; i <= c1; i++)
@@ -115,20 +120,44 @@ namespace LiveMatchtest
 
                     Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
 
-                    ss.SaveAsFile(@".\screenshots\\image.png");
+                    ss.SaveAsFile(@".\Screenshot\\image123.png");
                 }
+                if (smallstatus.Contains("innings break"))
+                {
+                    driver.Navigate().GoToUrl("https://cricket.yahoo.net/fixtures-results/scorecard/australia-vs-new-zealand-1st-odi-13th-march-2020-live-scores-aunz03132020190718");
 
+
+                    FunctionLibrary.waitForElement(driver, "//*[@class='si-dv-col si-rgt-cols']/span[3]/em");
+
+                    FunctionLibrary.MouseOver(driver, "//*[@class='si-dv-col si-rgt-cols']/span[3]/em");
+
+                    string NoBalls = driver.FindElement(By.XPath("//*[@class='si-dv-col si-rgt-cols']/span[3]/em")).Text;
+
+
+                    int noball = Convert.ToInt32(NoBalls);
+
+                    FunctionLibrary.waitForElement(driver, "//*[@class='si-dv-col si-rgt-cols']/span[4]/em");
+
+                    FunctionLibrary.MouseOver(driver, "//*[@class='si-dv-col si-rgt-cols']/span[4]/em");
+
+                    string widescount = driver.FindElement(By.XPath("//*[@class='si-dv-col si-rgt-cols']/span[4]/em")).Text;
+
+
+                    int widecount = Convert.ToInt32(widescount);
+
+
+                }
             }
             if (smallstatus.Contains(countrynameAS))
             {
 
 
 
-                FunctionLibrary.waitForElement(driver, "//*[@class='si-ove']");
+                FunctionLibrary.waitForElement(driver, "//*[@class='si-data si-teamA si-active']//*[@class='si-ove']");
 
-                FunctionLibrary.MouseOver(driver, "//*[@class='si-ove']");
+                FunctionLibrary.MouseOver(driver, "//*[@class='si-data si-teamA si-active']//*[@class='si-ove']");
 
-                string ballcount = driver.FindElement(By.XPath("//*[@class='si-data si-teamB si-active']//*[@class='si-ove']")).Text;
+                string ballcount = driver.FindElement(By.XPath("//*[@class='si-data si-teamA si-active']//*[@class='si-ove']")).Text;
 
 
 
@@ -146,6 +175,11 @@ namespace LiveMatchtest
                 FunctionLibrary.ScrollToBottomMC(driver);
 
                 Thread.Sleep(2000);
+
+                int wides = driver.FindElements(By.XPath("//*[text()='wd']")).Count;
+                int nballs = driver.FindElements(By.XPath("//*[text()='nb']")).Count;
+
+                int wkts = driver.FindElements(By.XPath("//*[@class='si-box' and text()='W']")).Count;
 
 
                 try
@@ -192,13 +226,55 @@ namespace LiveMatchtest
 
                     Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
 
-                    ss.SaveAsFile(@".\screenshots\\image.png");
+                    ss.SaveAsFile(@".\Screenshot\\image123.png");
                 }
+                if (smallstatus.Contains("innings break"))
+                {
+                    driver.Navigate().GoToUrl("https://cricket.yahoo.net/fixtures-results/scorecard/bangladesh-vs-zimbabwe-2nd-t20i-11th-march-2020-live-scores-bazm03112020194190");
 
+
+                    FunctionLibrary.waitForElement(driver, "//*[@class='si-dv-col si-rgt-cols']/span[3]/em");
+
+                    FunctionLibrary.MouseOver(driver, "//*[@class='si-dv-col si-rgt-cols']/span[3]/em");
+
+                    string NoBalls = driver.FindElement(By.XPath("//*[@class='si-dv-col si-rgt-cols']/span[3]/em")).Text;
+
+
+                    int noball = Convert.ToInt32(NoBalls);
+
+                    FunctionLibrary.waitForElement(driver, "//*[@class='si-dv-col si-rgt-cols']/span[4]/em");
+
+                    FunctionLibrary.MouseOver(driver, "//*[@class='si-dv-col si-rgt-cols']/span[4]/em");
+
+                    string widescount = driver.FindElement(By.XPath("//*[@class='si-dv-col si-rgt-cols']/span[4]/em")).Text;
+
+
+                    int widecount = Convert.ToInt32(widescount);
+
+
+                    if(widecount.Equals(wides))
+                    {
+                        Console.WriteLine("Wides passed" + widescount);
+                    }
+
+                    if(noball.Equals(nballs))
+                    {
+
+                        Console.WriteLine("No balls passed" + noball);
+                    }
+
+                }
 
             }
 
-        
+            
+           
+
+            
+            
         }
+
+   
+
     }
 }
